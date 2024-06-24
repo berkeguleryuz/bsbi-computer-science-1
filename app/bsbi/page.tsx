@@ -130,7 +130,11 @@ const questions = [
   },
 ];
 
-const moreInfoContent = {
+type MoreInfoContent = {
+  [key: string]: string;
+};
+
+const moreInfoContent: MoreInfoContent = {
   "internet-pioneers":
     "The Internet as we know it today is the result of the work of many pioneers. Key figures include Vint Cerf and Bob Kahn (TCP/IP), Tim Berners-Lee (World Wide Web), and Ray Tomlinson (email).",
   "arpanet-history":
@@ -158,10 +162,10 @@ const InternetHistoryGame = () => {
   const [score, setScore] = useState(0);
   const [showExplanation, setShowExplanation] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
-  const handleAnswer = (index: any) => {
+  const handleAnswer = (index: number) => {
     setSelectedAnswer(index);
     setShowExplanation(true);
     if (index === questions[currentQuestion].correctAnswer) {
@@ -189,7 +193,7 @@ const InternetHistoryGame = () => {
     setShowMoreInfo(false);
   };
 
-  const getButtonClass = (index: any) => {
+  const getButtonClass = (index: number) => {
     if (!showExplanation) return "w-full";
     if (index === questions[currentQuestion].correctAnswer)
       return "w-full bg-green-600 hover:bg-green-700";
